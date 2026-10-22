@@ -26,12 +26,16 @@ class MyStackTest {
     }
 
     @Test
+    void popCheckPopEmptyStackException(){
+        var ex = assertThrows(ADTException.class, () -> stack.pop());
+        assertEquals("pop from an empty stack", ex.getMessage());
+    }
+
+    @Test
     void pop() throws ADTException {
         stack.push(1);
         assertEquals(1, stack.pop());
 
-        var ex = assertThrows(ADTException.class, () -> stack.pop());
-        assertEquals("pop from an empty stack", ex.getMessage());
     }
 
     @Test
