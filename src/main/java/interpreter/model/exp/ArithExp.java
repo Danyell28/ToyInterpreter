@@ -9,7 +9,7 @@ import interpreter.model.value.IntValue;
 public record ArithExp(ArithOp op, IExp left, IExp right) implements IExp {
 
     @Override
-    public IValue eval(IDictionary<String, IValue> symTable) throws MyException {
+    public IValue eval(IDictionary<String, IValue> symTable) throws ExpressionException{
         if (!(left.eval(symTable) instanceof IntValue(int n1)))
             throw new ExpressionException("first operand is not an integer");
         if (!(right.eval(symTable) instanceof IntValue(int n2)))
