@@ -35,28 +35,28 @@ class ArithExpTest {
     }
 
     @Test
-    void additionCorrectResult() throws ExpressionException {
+    void additionCorrectResult() throws MyException {
         IExp e = new ArithExp(ArithOp.ADD, new ValueExp( new IntValue(6)), new ValueExp(new IntValue(7)));
         IValue result = e.eval(symTable);
         assertEquals( new IntValue(13), result);
     }
 
     @Test
-    void substractionCorrectResult() throws ExpressionException {
+    void substractionCorrectResult() throws MyException {
         IExp e = new ArithExp(ArithOp.SUB, new ValueExp( new IntValue(6)), new ValueExp(new IntValue(7)));
         IValue result = e.eval(symTable);
         assertEquals( new IntValue(-1), result);
     }
 
     @Test
-    void multiplicationCorrectResult() throws ExpressionException {
+    void multiplicationCorrectResult() throws MyException {
         IExp e = new ArithExp(ArithOp.MUL, new ValueExp( new IntValue(6)), new ValueExp(new IntValue(7)));
         IValue result = e.eval(symTable);
         assertEquals( new IntValue(42), result);
     }
 
     @Test
-    void divisionCorrectResult() throws ExpressionException {
+    void divisionCorrectResult() throws MyException {
         IExp e = new ArithExp(ArithOp.DIV, new ValueExp( new IntValue(42)), new ValueExp(new IntValue(6)));
         IValue result = e.eval(symTable);
         assertEquals( new IntValue(7), result);
