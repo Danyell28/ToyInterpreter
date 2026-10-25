@@ -14,6 +14,6 @@ public record CompStmt(IStmt first, IStmt second) implements IStmt{
 
     @Override
     public String toString(){
-        return "(" + first + ";" + "second" + ")";
+        return "(" + first + ";" + second + ")";
     }
 }
