@@ -48,4 +48,17 @@ class ControllerTest {
     }
 
 
+    @Test
+    void allStepOnCompStmtWillExecuteEverythingOnTheStack() throws MyException {
+        IStmt decl = new VarDeclStmt("v", new IntType());
+        IStmt print = new PrintStmt(new VarExp("v"));
+        PrgState s = new PrgState(new MyStack<>(), new MyDictionary<>(), new MyList<>(),
+                new CompStmt(decl, print));
+        Controller c = new Controller(new Repository(s), false);
+
+        c.allStep();
+        assertTrue(s.getExeStack().isEmpty());
+    }
+
+
 }
