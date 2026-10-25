@@ -14,7 +14,7 @@ public record PrintStmt(IExp exp) implements IStmt {
 
     @Override
     public String toString(){
-        return "print("+exp+")";
+        return " print("+exp+") ";
     }
 
 }
