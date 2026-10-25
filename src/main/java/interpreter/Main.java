@@ -1,7 +1,9 @@
 package interpreter;
 
+import interpreter.view.TextMenu;
+
 public class Main {
     static void main() {
-        System.out.println("Hello world!");
+        new TextMenu().run();
     }
 }

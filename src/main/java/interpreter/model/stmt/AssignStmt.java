@@ -20,4 +20,9 @@ public record AssignStmt(String id, IExp exp) implements IStmt {
         symTable.update(id, val);
         return state;
     }
+
+    @Override
+    public String toString(){
+        return id +" = "+exp;
+    }
 }
