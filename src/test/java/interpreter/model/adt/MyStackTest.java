@@ -15,7 +15,7 @@ class MyStackTest {
     }
 
     @Test
-    void push() throws ADTException {
+    void pushCheckElementsWerePushedInTheRightOrder() throws ADTException {
         stack.push(1);
         stack.push(2);
         stack.push(3);
@@ -32,14 +32,15 @@ class MyStackTest {
     }
 
     @Test
-    void pop() throws ADTException {
+    void popCheckCorrectElementWasPopped() throws ADTException {
         stack.push(1);
-        assertEquals(1, stack.pop());
+        stack.push(2);
+        assertEquals(2, stack.pop());
 
     }
 
     @Test
-    void isEmpty() throws ADTException {
+    void isEmptyStackReturnsTheCheckCorrectly() throws ADTException {
         assertTrue(stack.isEmpty());
 
         stack.push(6);

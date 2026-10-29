@@ -15,7 +15,7 @@ class MyDictionaryTest {
     }
 
     @Test
-    void isDefined() {
+    void isDefinedReturnsCorrectResult() {
         dict.put(5,10);
         dict.put(7,4);
 
@@ -30,7 +30,7 @@ class MyDictionaryTest {
     }
 
     @Test
-    void lookupGetValues() throws ADTException {
+    void lookupGetValuesOnValidKeys() throws ADTException {
         dict.put(5,10);
         dict.put(7,4);
         assertEquals(10, dict.lookup(5));
@@ -38,7 +38,7 @@ class MyDictionaryTest {
     }
 
     @Test
-    void put() throws ADTException {
+    void putCheckTheCorrectValueWasPut() throws ADTException {
         dict.put(5,10);
         assertEquals(10, dict.lookup(5));
         dict.put(5,17);

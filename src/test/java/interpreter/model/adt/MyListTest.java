@@ -15,7 +15,7 @@ class MyListTest {
     }
 
     @Test
-    void add() throws ADTException {
+    void addCheckCorrectInsertionOrder() throws ADTException {
         list.add(3);
         list.add(10);
         assertEquals(3,list.get(0));
@@ -35,7 +35,7 @@ class MyListTest {
     }
 
     @Test
-    void get() throws ADTException {
+    void getCheckCorrectValueWasRetrieved() throws ADTException {
         list.add(3);
         list.add(10);
         list.add(-7);
@@ -44,7 +44,7 @@ class MyListTest {
     }
 
     @Test
-    void size() {
+    void sizecheckCorrectSize() {
         list.add(3);
         list.add(10);
         list.add(-7);
