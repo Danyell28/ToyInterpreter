@@ -9,8 +9,10 @@ import interpreter.model.adt.MyList;
 import interpreter.model.adt.MyStack;
 import interpreter.model.type.BoolType;
 import interpreter.model.type.IntType;
+import interpreter.model.type.StringType;
 import interpreter.model.value.BoolValue;
 import interpreter.model.value.IntValue;
+import interpreter.model.value.StringValue;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -43,5 +45,9 @@ class VarDeclStmtTest {
         IStmt statement2 = new VarDeclStmt("y", new BoolType());
         statement2.execute(state);
         assertEquals(new BoolValue(false), state.getSymTable().lookup("y"));
+
+        IStmt statement3 = new VarDeclStmt("z", new StringType());
+        statement3.execute(state);
+        assertEquals(new StringValue(""), state.getSymTable().lookup("z"));
     }
 }
