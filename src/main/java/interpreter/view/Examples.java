@@ -1,9 +1,6 @@
 package interpreter.view;
 
-import interpreter.model.exp.ArithExp;
-import interpreter.model.exp.ArithOp;
-import interpreter.model.exp.ValueExp;
-import interpreter.model.exp.VarExp;
+import interpreter.model.exp.*;
 import interpreter.model.stmt.*;
 import interpreter.model.stmt.fileStatements.CloseRFileStmt;
 import interpreter.model.stmt.fileStatements.OpenRFileStmt;
@@ -58,4 +55,10 @@ public class Examples {
     }
 
     public static final IStmt EX4 = fileExample("test.in");
+
+    public static final IStmt EX5 = new CompStmt(new VarDeclStmt("a", new IntType()),
+            new CompStmt(new VarDeclStmt("b", new IntType()),
+                    new CompStmt(new AssignStmt("a", new ValueExp(new IntValue(5))),
+                    new CompStmt(new AssignStmt("b", new ValueExp(new IntValue(7)) ),
+                            new IfStmt(new RelationalExp(RelOp.LT, new VarExp("a"), new VarExp("b")), new PrintStmt(new VarExp("a")), new PrintStmt( new VarExp("b")))))));
 }
