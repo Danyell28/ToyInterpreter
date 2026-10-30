@@ -22,7 +22,7 @@ class ControllerTest {
 
     @BeforeEach
     void setUp() throws ADTException {
-        state = new PrgState(new MyStack<>(), new MyDictionary<>(), new MyList<>(), new NopStmt());
+        state = new PrgState(new MyStack<>(), new MyDictionary<>(), new MyList<>(), new MyDictionary<>(),  new NopStmt());
         state.getExeStack().pop();
         controller = new Controller( new Repository(state), false);
     }
@@ -37,7 +37,7 @@ class ControllerTest {
     void oneStepOnCompStmtLeavesItsPartsOnTheStack() throws MyException {
         IStmt decl = new VarDeclStmt("v", new IntType());
         IStmt print = new PrintStmt(new VarExp("v"));
-        PrgState s = new PrgState(new MyStack<>(), new MyDictionary<>(), new MyList<>(),
+        PrgState s = new PrgState(new MyStack<>(), new MyDictionary<>(), new MyList<>(), new MyDictionary<>(),
                 new CompStmt(decl, print));
         Controller c = new Controller(new Repository(s), false);
 
@@ -52,7 +52,7 @@ class ControllerTest {
     void allStepOnCompStmtWillExecuteEverythingOnTheStack() throws MyException {
         IStmt decl = new VarDeclStmt("v", new IntType());
         IStmt print = new PrintStmt(new VarExp("v"));
-        PrgState s = new PrgState(new MyStack<>(), new MyDictionary<>(), new MyList<>(),
+        PrgState s = new PrgState(new MyStack<>(), new MyDictionary<>(), new MyList<>(), new MyDictionary<>(),
                 new CompStmt(decl, print));
         Controller c = new Controller(new Repository(s), false);
 

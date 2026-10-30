@@ -60,7 +60,7 @@ public class TextMenu {
             System.out.println("Select a program first!!!");
             return;
         }
-        PrgState state = new PrgState(new MyStack<>(), new MyDictionary<>(), new MyList<>(), selected);
+        PrgState state = new PrgState(new MyStack<>(), new MyDictionary<>(), new MyList<>(), new MyDictionary<>(), selected);
         IRepository repo = new Repository(state);
         Controller controller = new Controller( repo, true );
         try{
