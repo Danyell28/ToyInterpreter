@@ -10,21 +10,30 @@ import interpreter.model.adt.MyStack;
 import interpreter.model.exp.VarExp;
 import interpreter.model.stmt.*;
 import interpreter.model.type.IntType;
+import interpreter.repository.IRepository;
 import interpreter.repository.Repository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+
+import java.nio.file.Path;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ControllerTest {
     private Controller controller;
+    private IRepository repo;
     private PrgState state;
+
+    @TempDir
+    Path dir;
 
     @BeforeEach
     void setUp() throws ADTException {
-        state = new PrgState(new MyStack<>(), new MyDictionary<>(), new MyList<>(), new MyDictionary<>(),  new NopStmt());
+        state = PrgState.of(new NopStmt());
         state.getExeStack().pop();
-        controller = new Controller( new Repository(state), false);
+        repo = new Repository(state, dir.resolve("log.txt").toString());
+        controller = new Controller( repo, false);
     }
 
     @Test
@@ -39,9 +48,8 @@ class ControllerTest {
         IStmt print = new PrintStmt(new VarExp("v"));
         PrgState s = new PrgState(new MyStack<>(), new MyDictionary<>(), new MyList<>(), new MyDictionary<>(),
                 new CompStmt(decl, print));
-        Controller c = new Controller(new Repository(s), false);
 
-        c.oneStep(s);
+        controller.oneStep(s);
         assertSame(decl, s.getExeStack().pop());
         assertSame(print, s.getExeStack().pop());
         assertTrue(s.getExeStack().isEmpty());
@@ -52,12 +60,12 @@ class ControllerTest {
     void allStepOnCompStmtWillExecuteEverythingOnTheStack() throws MyException {
         IStmt decl = new VarDeclStmt("v", new IntType());
         IStmt print = new PrintStmt(new VarExp("v"));
-        PrgState s = new PrgState(new MyStack<>(), new MyDictionary<>(), new MyList<>(), new MyDictionary<>(),
-                new CompStmt(decl, print));
-        Controller c = new Controller(new Repository(s), false);
-
-        c.allStep();
-        assertTrue(s.getExeStack().isEmpty());
+        IStmt comp = new CompStmt(decl, print);
+        state = PrgState.of(comp);
+        repo = new Repository(state, dir.resolve("log.txt").toString());
+        controller = new Controller(repo,false);
+        controller.allStep();
+        assertTrue(state.getExeStack().isEmpty());
     }
 
 

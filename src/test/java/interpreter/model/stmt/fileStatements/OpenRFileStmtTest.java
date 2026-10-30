@@ -11,6 +11,7 @@ import interpreter.model.exp.ValueExp;
 import interpreter.model.exp.VarExp;
 import interpreter.model.stmt.AssignStmt;
 import interpreter.model.stmt.IStmt;
+import interpreter.model.stmt.NopStmt;
 import interpreter.model.value.IntValue;
 import interpreter.model.value.StringValue;
 import org.junit.jupiter.api.BeforeEach;
@@ -32,8 +33,7 @@ class OpenRFileStmtTest {
 
     @BeforeEach
     void setUp() throws ADTException {
-        state = new PrgState(new MyStack<>(), new MyDictionary<>(), new MyList<>(), new MyDictionary<>(),new AssignStmt("dummy", new VarExp("dummy")));
-        state.getExeStack().pop();
+        state = PrgState.of(new NopStmt());
     }
 
     @Test
