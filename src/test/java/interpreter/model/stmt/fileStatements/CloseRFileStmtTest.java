@@ -16,8 +16,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
-import java.io.BufferedReader;
-import java.io.Reader;
+import java.io.*;
+import java.nio.file.Files;
 import java.nio.file.Path;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -47,13 +47,37 @@ class CloseRFileStmtTest {
         assertEquals("closeRFile: \"in.txt\" is not opened", ex.getMessage());
     }
 
-    /*
+
     @Test
-    void closingAnExistentFileException(){
-        state.getFileTable().put(new StringValue("missing.txt"), )
-        IStmt stmt = new OpenRFileStmt(new ValueExp(new StringValue("missing.txt")));
+    void failureWhileClosingException(){
+
+        BufferedReader failing = new BufferedReader(new StringReader("")) {
+            @Override
+            public void close() throws IOException {
+                throw new IOException("disk on fire");
+            }
+        };
+        StringValue name = new StringValue("missing.txt");
+        state.getFileTable().put(name, failing);
+
+        IStmt stmt = new CloseRFileStmt(new ValueExp(name));
         var ex = assertThrows(StatementException.class, () -> stmt.execute(state));
-        assertTrue(ex.getMessage().startsWith("openRFile: cannot open "));
-        assertFalse(state.getFileTable().isDefined(new StringValue("missing.txt")));
-    }*/
+
+        assertTrue(ex.getMessage().contains("disk on fire"));
+        assertTrue(state.getFileTable().isDefined(name));
+    }
+
+    @Test
+    void closingAnOpenFileClosesTheReaderAndRemovesItFromTheTable() throws Exception {
+        Path file = dir.resolve("data.txt");
+        Files.writeString(file, "hello\n");
+        StringValue name = new StringValue(file.toString());
+        BufferedReader reader = new BufferedReader(new FileReader(file.toFile()));
+        state.getFileTable().put(name, reader);
+
+        new CloseRFileStmt(new ValueExp(name)).execute(state);
+
+        assertFalse(state.getFileTable().isDefined(name));
+        assertThrows(IOException.class, reader::readLine);
+    }
 }
