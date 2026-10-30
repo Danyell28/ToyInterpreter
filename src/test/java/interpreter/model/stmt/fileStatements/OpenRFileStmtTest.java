@@ -12,6 +12,8 @@ import interpreter.model.exp.VarExp;
 import interpreter.model.stmt.AssignStmt;
 import interpreter.model.stmt.IStmt;
 import interpreter.model.stmt.NopStmt;
+import interpreter.model.stmt.VarDeclStmt;
+import interpreter.model.type.IntType;
 import interpreter.model.value.IntValue;
 import interpreter.model.value.StringValue;
 import org.junit.jupiter.api.BeforeEach;
@@ -28,11 +30,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class OpenRFileStmtTest {
     @TempDir
-    Path dir;   // must not be private
+    Path dir; // a new empty folder for every test
     private PrgState state;
+    private ValueExp file;
 
     @BeforeEach
-    void setUp() throws ADTException {
+    void setUp() throws Exception {
         state = PrgState.of(new NopStmt());
     }
 
@@ -54,8 +57,12 @@ class OpenRFileStmtTest {
 
     @Test
     void openingANonExistentFileException(){
-        IStmt stmt = new OpenRFileStmt(new ValueExp(new StringValue("missing.txt")));
+        StringValue missing = new StringValue(dir.resolve("missing.txt").toString());
+
+        IStmt stmt = new OpenRFileStmt(new ValueExp(missing));
+
         var ex = assertThrows(StatementException.class, () -> stmt.execute(state));
+
         assertTrue(ex.getMessage().startsWith("openRFile: cannot open "));
         assertFalse(state.getFileTable().isDefined(new StringValue("missing.txt")));
     }

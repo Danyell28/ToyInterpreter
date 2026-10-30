@@ -25,11 +25,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CloseRFileStmtTest {
     @TempDir
-    Path dir;   // must not be private
+    Path dir; // a new empty folder for every test
     private PrgState state;
 
     @BeforeEach
-    void setUp() throws ADTException {
+    void setUp() throws Exception {
         state = PrgState.of(new NopStmt());
     }
 
@@ -57,7 +57,7 @@ class CloseRFileStmtTest {
                 throw new IOException("disk on fire");
             }
         };
-        StringValue name = new StringValue("missing.txt");
+        StringValue name = new StringValue("data.txt");
         state.getFileTable().put(name, failing);
 
         IStmt stmt = new CloseRFileStmt(new ValueExp(name));
@@ -79,5 +79,18 @@ class CloseRFileStmtTest {
 
         assertFalse(state.getFileTable().isDefined(name));
         assertThrows(IOException.class, reader::readLine);
+    }
+
+    @Test
+    void closingOneFileLeavesTheOtherOpen() throws Exception {
+        StringValue a = new StringValue("a.txt");
+        StringValue b = new StringValue("b.txt");
+        state.getFileTable().put(a, new BufferedReader(new StringReader("1\n")));
+        state.getFileTable().put(b, new BufferedReader(new StringReader("2\n")));
+
+        new CloseRFileStmt(new ValueExp(a)).execute(state);
+
+        assertFalse(state.getFileTable().isDefined(a));
+        assertTrue(state.getFileTable().isDefined(b));
     }
 }
