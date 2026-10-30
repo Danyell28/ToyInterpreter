@@ -3,6 +3,7 @@ package interpreter.model.adt;
 import interpreter.exceptions.ADTException;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class MyDictionary<K, V> implements IDictionary<K, V>{
     private final HashMap<K, V> dict = new HashMap<>();
@@ -34,5 +35,17 @@ public class MyDictionary<K, V> implements IDictionary<K, V>{
     @Override
     public String toString(){
         return dict.toString();
+    }
+
+    @Override
+    public void remove(K key) throws ADTException {
+        if ( !dict.containsKey(key) )
+            throw new ADTException("Key does not exist!");
+        dict.remove(key);
+    }
+
+    @Override
+    public Map<K, V> toMap(){
+        return Map.copyOf(dict);
     }
 }

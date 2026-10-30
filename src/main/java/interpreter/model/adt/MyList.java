@@ -3,6 +3,7 @@ package interpreter.model.adt;
 import interpreter.exceptions.ADTException;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MyList<T> implements IList<T>{
     private final ArrayList<T> l = new ArrayList<>();
@@ -27,5 +28,10 @@ public class MyList<T> implements IList<T>{
     @Override
     public String toString(){
         return l.toString();
+    }
+
+    @Override
+    public List<T> toList(){
+        return List.copyOf(l);
     }
 }
