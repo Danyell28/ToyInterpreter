@@ -23,6 +23,6 @@ public record AssignStmt(String id, IExp exp) implements IStmt {
 
     @Override
     public String toString(){
-        return id +" = "+exp+" ";
+        return id + " = " + exp + " ";
     }
 }

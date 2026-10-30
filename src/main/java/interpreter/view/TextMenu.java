@@ -40,7 +40,7 @@ public class TextMenu {
     void selectProgram(){
         while(true){
             System.out.println();
-            for(int i=0; i<3; i++){
+            for(int i=0; i<4; i++){
                 System.out.println(i+1 + ". "+Examples.ALL.get(i));
             }
             System.out.print("> ");
@@ -49,6 +49,7 @@ public class TextMenu {
                 case 1: selected = Examples.ALL.get(0); return;
                 case 2: selected = Examples.ALL.get(1); return;
                 case 3: selected = Examples.ALL.get(2); return;
+                case 4: selected = Examples.ALL.get(3); return;
                 default: System.out.println("Invalid input!!!");
             }
         }
