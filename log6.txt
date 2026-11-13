@@ -1,120 +1,523 @@
 ExeStack:
-(int a ;(int b ;(bool c ;(a = 1 ;(b = 2 ;(c = (a != b) ; print(c) ) ) ) ) ) ) 
+(int v ;(v = 4 ;((while ((v > 0)) ( print(v) ;v = (v - 1) ) ); print(v) ) ) ) 
 SymTable:
 Out:
 FileTable:
+Heap:
 
 ExeStack:
-int a 
-(int b ;(bool c ;(a = 1 ;(b = 2 ;(c = (a != b) ; print(c) ) ) ) ) ) 
+int v 
+(v = 4 ;((while ((v > 0)) ( print(v) ;v = (v - 1) ) ); print(v) ) ) 
 SymTable:
 Out:
 FileTable:
+Heap:
 
 ExeStack:
-(int b ;(bool c ;(a = 1 ;(b = 2 ;(c = (a != b) ; print(c) ) ) ) ) ) 
+int v 
+(v = 4 ;((while ((v > 0)) ( print(v) ;v = (v - 1) ) ); print(v) ) ) 
 SymTable:
-a --> 0
 Out:
 FileTable:
+Heap:
 
 ExeStack:
-int b 
-(bool c ;(a = 1 ;(b = 2 ;(c = (a != b) ; print(c) ) ) ) ) 
+(v = 4 ;((while ((v > 0)) ( print(v) ;v = (v - 1) ) ); print(v) ) ) 
 SymTable:
-a --> 0
+v --> 0
 Out:
 FileTable:
+Heap:
 
 ExeStack:
-(bool c ;(a = 1 ;(b = 2 ;(c = (a != b) ; print(c) ) ) ) ) 
+(v = 4 ;((while ((v > 0)) ( print(v) ;v = (v - 1) ) ); print(v) ) ) 
 SymTable:
-b --> 0
-a --> 0
+v --> 0
 Out:
 FileTable:
+Heap:
 
 ExeStack:
-bool c 
-(a = 1 ;(b = 2 ;(c = (a != b) ; print(c) ) ) ) 
+v = 4 
+((while ((v > 0)) ( print(v) ;v = (v - 1) ) ); print(v) ) 
 SymTable:
-b --> 0
-a --> 0
+v --> 0
 Out:
 FileTable:
+Heap:
 
 ExeStack:
-(a = 1 ;(b = 2 ;(c = (a != b) ; print(c) ) ) ) 
+v = 4 
+((while ((v > 0)) ( print(v) ;v = (v - 1) ) ); print(v) ) 
 SymTable:
-c --> false
-a --> 0
-b --> 0
+v --> 0
 Out:
 FileTable:
+Heap:
 
 ExeStack:
-a = 1 
-(b = 2 ;(c = (a != b) ; print(c) ) ) 
+((while ((v > 0)) ( print(v) ;v = (v - 1) ) ); print(v) ) 
 SymTable:
-c --> false
-a --> 0
-b --> 0
+v --> 4
 Out:
 FileTable:
+Heap:
 
 ExeStack:
-(b = 2 ;(c = (a != b) ; print(c) ) ) 
+((while ((v > 0)) ( print(v) ;v = (v - 1) ) ); print(v) ) 
 SymTable:
-c --> false
-a --> 1
-b --> 0
+v --> 4
 Out:
 FileTable:
+Heap:
 
 ExeStack:
-b = 2 
-(c = (a != b) ; print(c) ) 
+(while ((v > 0)) ( print(v) ;v = (v - 1) ) )
+ print(v) 
 SymTable:
-c --> false
-a --> 1
-b --> 0
+v --> 4
 Out:
 FileTable:
+Heap:
 
 ExeStack:
-(c = (a != b) ; print(c) ) 
+(while ((v > 0)) ( print(v) ;v = (v - 1) ) )
+ print(v) 
 SymTable:
-c --> false
-a --> 1
-b --> 2
+v --> 4
 Out:
 FileTable:
+Heap:
 
 ExeStack:
-c = (a != b) 
- print(c) 
+( print(v) ;v = (v - 1) ) 
+(while ((v > 0)) ( print(v) ;v = (v - 1) ) )
+ print(v) 
 SymTable:
-c --> false
-a --> 1
-b --> 2
+v --> 4
 Out:
 FileTable:
+Heap:
 
 ExeStack:
- print(c) 
+( print(v) ;v = (v - 1) ) 
+(while ((v > 0)) ( print(v) ;v = (v - 1) ) )
+ print(v) 
 SymTable:
-c --> true
-a --> 1
-b --> 2
+v --> 4
 Out:
 FileTable:
+Heap:
+
+ExeStack:
+ print(v) 
+v = (v - 1) 
+(while ((v > 0)) ( print(v) ;v = (v - 1) ) )
+ print(v) 
+SymTable:
+v --> 4
+Out:
+FileTable:
+Heap:
+
+ExeStack:
+ print(v) 
+v = (v - 1) 
+(while ((v > 0)) ( print(v) ;v = (v - 1) ) )
+ print(v) 
+SymTable:
+v --> 4
+Out:
+FileTable:
+Heap:
+
+ExeStack:
+v = (v - 1) 
+(while ((v > 0)) ( print(v) ;v = (v - 1) ) )
+ print(v) 
+SymTable:
+v --> 4
+Out:
+4
+FileTable:
+Heap:
+
+ExeStack:
+v = (v - 1) 
+(while ((v > 0)) ( print(v) ;v = (v - 1) ) )
+ print(v) 
+SymTable:
+v --> 4
+Out:
+4
+FileTable:
+Heap:
+
+ExeStack:
+(while ((v > 0)) ( print(v) ;v = (v - 1) ) )
+ print(v) 
+SymTable:
+v --> 3
+Out:
+4
+FileTable:
+Heap:
+
+ExeStack:
+(while ((v > 0)) ( print(v) ;v = (v - 1) ) )
+ print(v) 
+SymTable:
+v --> 3
+Out:
+4
+FileTable:
+Heap:
+
+ExeStack:
+( print(v) ;v = (v - 1) ) 
+(while ((v > 0)) ( print(v) ;v = (v - 1) ) )
+ print(v) 
+SymTable:
+v --> 3
+Out:
+4
+FileTable:
+Heap:
+
+ExeStack:
+( print(v) ;v = (v - 1) ) 
+(while ((v > 0)) ( print(v) ;v = (v - 1) ) )
+ print(v) 
+SymTable:
+v --> 3
+Out:
+4
+FileTable:
+Heap:
+
+ExeStack:
+ print(v) 
+v = (v - 1) 
+(while ((v > 0)) ( print(v) ;v = (v - 1) ) )
+ print(v) 
+SymTable:
+v --> 3
+Out:
+4
+FileTable:
+Heap:
+
+ExeStack:
+ print(v) 
+v = (v - 1) 
+(while ((v > 0)) ( print(v) ;v = (v - 1) ) )
+ print(v) 
+SymTable:
+v --> 3
+Out:
+4
+FileTable:
+Heap:
+
+ExeStack:
+v = (v - 1) 
+(while ((v > 0)) ( print(v) ;v = (v - 1) ) )
+ print(v) 
+SymTable:
+v --> 3
+Out:
+4
+3
+FileTable:
+Heap:
+
+ExeStack:
+v = (v - 1) 
+(while ((v > 0)) ( print(v) ;v = (v - 1) ) )
+ print(v) 
+SymTable:
+v --> 3
+Out:
+4
+3
+FileTable:
+Heap:
+
+ExeStack:
+(while ((v > 0)) ( print(v) ;v = (v - 1) ) )
+ print(v) 
+SymTable:
+v --> 2
+Out:
+4
+3
+FileTable:
+Heap:
+
+ExeStack:
+(while ((v > 0)) ( print(v) ;v = (v - 1) ) )
+ print(v) 
+SymTable:
+v --> 2
+Out:
+4
+3
+FileTable:
+Heap:
+
+ExeStack:
+( print(v) ;v = (v - 1) ) 
+(while ((v > 0)) ( print(v) ;v = (v - 1) ) )
+ print(v) 
+SymTable:
+v --> 2
+Out:
+4
+3
+FileTable:
+Heap:
+
+ExeStack:
+( print(v) ;v = (v - 1) ) 
+(while ((v > 0)) ( print(v) ;v = (v - 1) ) )
+ print(v) 
+SymTable:
+v --> 2
+Out:
+4
+3
+FileTable:
+Heap:
+
+ExeStack:
+ print(v) 
+v = (v - 1) 
+(while ((v > 0)) ( print(v) ;v = (v - 1) ) )
+ print(v) 
+SymTable:
+v --> 2
+Out:
+4
+3
+FileTable:
+Heap:
+
+ExeStack:
+ print(v) 
+v = (v - 1) 
+(while ((v > 0)) ( print(v) ;v = (v - 1) ) )
+ print(v) 
+SymTable:
+v --> 2
+Out:
+4
+3
+FileTable:
+Heap:
+
+ExeStack:
+v = (v - 1) 
+(while ((v > 0)) ( print(v) ;v = (v - 1) ) )
+ print(v) 
+SymTable:
+v --> 2
+Out:
+4
+3
+2
+FileTable:
+Heap:
+
+ExeStack:
+v = (v - 1) 
+(while ((v > 0)) ( print(v) ;v = (v - 1) ) )
+ print(v) 
+SymTable:
+v --> 2
+Out:
+4
+3
+2
+FileTable:
+Heap:
+
+ExeStack:
+(while ((v > 0)) ( print(v) ;v = (v - 1) ) )
+ print(v) 
+SymTable:
+v --> 1
+Out:
+4
+3
+2
+FileTable:
+Heap:
+
+ExeStack:
+(while ((v > 0)) ( print(v) ;v = (v - 1) ) )
+ print(v) 
+SymTable:
+v --> 1
+Out:
+4
+3
+2
+FileTable:
+Heap:
+
+ExeStack:
+( print(v) ;v = (v - 1) ) 
+(while ((v > 0)) ( print(v) ;v = (v - 1) ) )
+ print(v) 
+SymTable:
+v --> 1
+Out:
+4
+3
+2
+FileTable:
+Heap:
+
+ExeStack:
+( print(v) ;v = (v - 1) ) 
+(while ((v > 0)) ( print(v) ;v = (v - 1) ) )
+ print(v) 
+SymTable:
+v --> 1
+Out:
+4
+3
+2
+FileTable:
+Heap:
+
+ExeStack:
+ print(v) 
+v = (v - 1) 
+(while ((v > 0)) ( print(v) ;v = (v - 1) ) )
+ print(v) 
+SymTable:
+v --> 1
+Out:
+4
+3
+2
+FileTable:
+Heap:
+
+ExeStack:
+ print(v) 
+v = (v - 1) 
+(while ((v > 0)) ( print(v) ;v = (v - 1) ) )
+ print(v) 
+SymTable:
+v --> 1
+Out:
+4
+3
+2
+FileTable:
+Heap:
+
+ExeStack:
+v = (v - 1) 
+(while ((v > 0)) ( print(v) ;v = (v - 1) ) )
+ print(v) 
+SymTable:
+v --> 1
+Out:
+4
+3
+2
+1
+FileTable:
+Heap:
+
+ExeStack:
+v = (v - 1) 
+(while ((v > 0)) ( print(v) ;v = (v - 1) ) )
+ print(v) 
+SymTable:
+v --> 1
+Out:
+4
+3
+2
+1
+FileTable:
+Heap:
+
+ExeStack:
+(while ((v > 0)) ( print(v) ;v = (v - 1) ) )
+ print(v) 
+SymTable:
+v --> 0
+Out:
+4
+3
+2
+1
+FileTable:
+Heap:
+
+ExeStack:
+(while ((v > 0)) ( print(v) ;v = (v - 1) ) )
+ print(v) 
+SymTable:
+v --> 0
+Out:
+4
+3
+2
+1
+FileTable:
+Heap:
+
+ExeStack:
+ print(v) 
+SymTable:
+v --> 0
+Out:
+4
+3
+2
+1
+FileTable:
+Heap:
+
+ExeStack:
+ print(v) 
+SymTable:
+v --> 0
+Out:
+4
+3
+2
+1
+FileTable:
+Heap:
 
 ExeStack:
 SymTable:
-c --> true
-a --> 1
-b --> 2
+v --> 0
 Out:
-true
+4
+3
+2
+1
+0
 FileTable:
+Heap:
+
+ExeStack:
+SymTable:
+v --> 0
+Out:
+4
+3
+2
+1
+0
+FileTable:
+Heap:
 

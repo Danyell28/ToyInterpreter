@@ -45,4 +45,9 @@ public class MyHeap implements IHeap{
     public void setContent(Map<Integer, IValue> content) {
         heap = new HashMap<>(content);
     }
+
+    @Override
+    public String toString(){
+        return heap.toString();
+    }
 }

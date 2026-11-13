@@ -62,6 +62,7 @@ public class Examples {
                     new CompStmt(new AssignStmt("b", new ValueExp(new IntValue(7)) ),
                             new IfStmt(new RelationalExp(RelOp.LT, new VarExp("a"), new VarExp("b")), new PrintStmt(new VarExp("a")), new PrintStmt( new VarExp("b")))))));
 
+    /*
     public static final IStmt EX6 = new CompStmt( new VarDeclStmt("a", new IntType()),
             new CompStmt(new VarDeclStmt("b", new IntType()),
                     new CompStmt(new VarDeclStmt("c", new BoolType()),
@@ -69,4 +70,18 @@ public class Examples {
                                     new CompStmt(new AssignStmt("b", new ValueExp(new IntValue(2))),
                                             new CompStmt( new AssignStmt("c", new RelationalExp(RelOp.NE, new VarExp("a"),new VarExp ("b"))),
                                             new PrintStmt(new VarExp("c"))))))));
+    */
+    public static final IStmt
+
+    // int v; v = 4; (while (v > 0) (print(v); v = v - 1)); print(v)
+    public static final IStmt EX10 =
+            new CompStmt(new VarDeclStmt("v", new IntType()),
+                    new CompStmt(new AssignStmt("v", new ValueExp(new IntValue(4))),
+                            new CompStmt(new WhileStmt(
+                                    new RelationalExp(RelOp.GT, new VarExp("v"), new ValueExp(new IntValue(0))),
+                                    new CompStmt(new PrintStmt(new VarExp("v")),
+                                            new AssignStmt("v", new ArithExp(ArithOp.SUB,
+                                                    new VarExp("v"), new ValueExp(new IntValue(1)))))),
+                                    new PrintStmt(new VarExp("v")))));
+
 }
