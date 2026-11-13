@@ -3,7 +3,9 @@ package interpreter.model.exp;
 import interpreter.exceptions.ExpressionException;
 import interpreter.exceptions.MyException;
 import interpreter.model.adt.IDictionary;
+import interpreter.model.adt.IHeap;
 import interpreter.model.adt.MyDictionary;
+import interpreter.model.adt.MyHeap;
 import interpreter.model.value.BoolValue;
 import interpreter.model.value.IValue;
 import interpreter.model.value.IntValue;
@@ -14,54 +16,56 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LogicExpTest {
     private IDictionary<String, IValue> symTable;
+    private IHeap heap;
 
     @BeforeEach
     void setUp() {
         symTable = new MyDictionary<>();
+        heap = new MyHeap();
     }
 
     @Test
     void firstOperandNotOfBooleanType(){
         IExp e = new LogicExp(LogicOp.AND, new ValueExp(new IntValue(4)), new ValueExp( new BoolValue(true)));
-        var ex = assertThrows(ExpressionException.class, () -> e.eval(symTable));
+        var ex = assertThrows(ExpressionException.class, () -> e.eval(symTable, heap ));
         assertEquals("First operand is not boolean", ex.getMessage());
     }
 
     @Test
     void secondOperandNotOfBooleanType(){
         IExp e = new LogicExp(LogicOp.AND, new ValueExp( new BoolValue(true)), new ValueExp(new IntValue(4)));
-        var ex = assertThrows(ExpressionException.class, () -> e.eval(symTable));
+        var ex = assertThrows(ExpressionException.class, () -> e.eval(symTable,heap ));
         assertEquals("Second operand is not boolean", ex.getMessage());
     }
 
     @Test
     void conjunctionOperationCorrectResult() throws MyException {
         IExp e1 = new LogicExp(LogicOp.AND, new ValueExp( new BoolValue(false)), new ValueExp(new BoolValue(false)));
-        assertEquals(new BoolValue(false), e1.eval(symTable));
+        assertEquals(new BoolValue(false), e1.eval(symTable,heap ));
 
         IExp e2 = new LogicExp(LogicOp.AND, new ValueExp( new BoolValue(false)), new ValueExp(new BoolValue(true)));
-        assertEquals(new BoolValue(false), e2.eval(symTable));
+        assertEquals(new BoolValue(false), e2.eval(symTable, heap));
 
         IExp e3 = new LogicExp(LogicOp.AND, new ValueExp( new BoolValue(true)), new ValueExp(new BoolValue(false)));
-        assertEquals(new BoolValue(false), e3.eval(symTable));
+        assertEquals(new BoolValue(false), e3.eval(symTable,heap ));
 
         IExp e4 = new LogicExp(LogicOp.AND, new ValueExp( new BoolValue(true)), new ValueExp(new BoolValue(true)));
-        assertEquals(new BoolValue(true), e4.eval(symTable));
+        assertEquals(new BoolValue(true), e4.eval(symTable,heap ));
     }
 
     @Test
     void disjunctionOperationCorrectResult() throws MyException {
         IExp e1 = new LogicExp(LogicOp.OR, new ValueExp( new BoolValue(false)), new ValueExp(new BoolValue(false)));
-        assertEquals(new BoolValue(false), e1.eval(symTable));
+        assertEquals(new BoolValue(false), e1.eval(symTable, heap));
 
         IExp e2 = new LogicExp(LogicOp.OR, new ValueExp( new BoolValue(false)), new ValueExp(new BoolValue(true)));
-        assertEquals(new BoolValue(true), e2.eval(symTable));
+        assertEquals(new BoolValue(true), e2.eval(symTable, heap ));
 
         IExp e3 = new LogicExp(LogicOp.OR, new ValueExp( new BoolValue(true)), new ValueExp(new BoolValue(false)));
-        assertEquals(new BoolValue(true), e3.eval(symTable));
+        assertEquals(new BoolValue(true), e3.eval(symTable, heap));
 
         IExp e4 = new LogicExp(LogicOp.OR, new ValueExp( new BoolValue(true)), new ValueExp(new BoolValue(true)));
-        assertEquals(new BoolValue(true), e4.eval(symTable));
+        assertEquals(new BoolValue(true), e4.eval(symTable, heap));
     }
 
 }

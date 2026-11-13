@@ -5,6 +5,7 @@ import interpreter.exceptions.MyException;
 import interpreter.exceptions.StatementException;
 import interpreter.model.PrgState;
 import interpreter.model.adt.MyDictionary;
+import interpreter.model.adt.MyHeap;
 import interpreter.model.adt.MyList;
 import interpreter.model.adt.MyStack;
 import interpreter.model.exp.VarExp;
@@ -50,7 +51,7 @@ class ControllerTest {
         IStmt decl = new VarDeclStmt("v", new IntType());
         IStmt print = new PrintStmt(new VarExp("v"));
         PrgState s = new PrgState(new MyStack<>(), new MyDictionary<>(), new MyList<>(), new MyDictionary<>(),
-                new CompStmt(decl, print));
+               new MyHeap(), new CompStmt(decl, print));
 
         controller.oneStep(s);
         assertSame(decl, s.getExeStack().pop());
