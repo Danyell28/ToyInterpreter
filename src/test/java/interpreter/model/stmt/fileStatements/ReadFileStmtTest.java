@@ -108,10 +108,15 @@ class ReadFileStmtTest {
     }
 
     @Test
-    void readGivesTheNumbersInOrder() throws MyException {
+    void readGivesTheNumbersInOrder() throws MyException, IOException {
         new VarDeclStmt("x", new IntType()).execute(state);
-        fakeFile("in.txt", readerOf("15\n50\n"));
-        IStmt stmt = new ReadFileStmt(new ValueExp(new StringValue("in.txt")), "x");
+        Path file = dir.resolve("data.txt");
+        Files.writeString(file, "15\n50\n");
+        StringValue name = new StringValue(file.toString());
+
+        new OpenRFileStmt(new ValueExp(name)).execute(state);
+        BufferedReader reader = state.getFileTable().lookup(name);
+        IStmt stmt = new ReadFileStmt(new ValueExp(name), "x");
 
         stmt.execute(state);
         assertEquals(new IntValue(15), state.getSymTable().lookup("x"));
@@ -119,6 +124,8 @@ class ReadFileStmtTest {
         assertEquals(new IntValue(50), state.getSymTable().lookup("x"));
         stmt.execute(state);
         assertEquals(new IntValue(0), state.getSymTable().lookup("x"));
+
+        new CloseRFileStmt(new ValueExp(name)).execute(state);
     }
 
 
