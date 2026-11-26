@@ -5,8 +5,11 @@ import interpreter.model.stmt.*;
 import interpreter.model.stmt.fileStatements.CloseRFileStmt;
 import interpreter.model.stmt.fileStatements.OpenRFileStmt;
 import interpreter.model.stmt.fileStatements.ReadFileStmt;
+import interpreter.model.stmt.heapStatements.NewStmt;
+import interpreter.model.stmt.heapStatements.WriteHeapStatement;
 import interpreter.model.type.BoolType;
 import interpreter.model.type.IntType;
+import interpreter.model.type.RefType;
 import interpreter.model.type.StringType;
 import interpreter.model.value.BoolValue;
 import interpreter.model.value.IntValue;
@@ -71,7 +74,37 @@ public class Examples {
                                             new CompStmt( new AssignStmt("c", new RelationalExp(RelOp.NE, new VarExp("a"),new VarExp ("b"))),
                                             new PrintStmt(new VarExp("c"))))))));
     */
-    public static final IStmt
+
+    public static final IStmt EX6 =
+            new CompStmt(new VarDeclStmt("v", new RefType(new IntType())),
+                    new CompStmt(new NewStmt("v", new ValueExp(new IntValue(20))),
+                            new CompStmt(new VarDeclStmt("a", new RefType(new RefType(new IntType()))),
+                                    new CompStmt(new NewStmt("a", new VarExp("v")),
+                                            new CompStmt(new PrintStmt(new VarExp("v")),
+                                                    new PrintStmt(new VarExp("a")))))));
+
+    public static final IStmt EX7 =
+            new CompStmt(new VarDeclStmt("v", new RefType(new IntType())),
+                    new CompStmt(new NewStmt("v", new ValueExp(new IntValue(20))),
+                            new CompStmt(new VarDeclStmt("a", new RefType(new RefType(new IntType()))),
+                                    new CompStmt(new NewStmt("a", new VarExp("v")),
+                                            new CompStmt(new PrintStmt(new ReadHeapExp(new VarExp("v"))),
+                                            new PrintStmt(new ArithExp(ArithOp.ADD, new ReadHeapExp(new ReadHeapExp(new VarExp("a"))), new ValueExp(new IntValue(5)))))))));
+
+    public static final IStmt EX8 =
+            new CompStmt( new VarDeclStmt("v", new RefType(new IntType())),
+                    new CompStmt(new NewStmt("v", new ValueExp(new IntValue(20))),
+                            new CompStmt(new PrintStmt(new ReadHeapExp(new VarExp("v"))),
+                                new CompStmt(new WriteHeapStatement("v", new ValueExp(new IntValue(30))),
+                                        new PrintStmt(new ArithExp(ArithOp.ADD, new ReadHeapExp(new VarExp("v")), new ValueExp(new IntValue(5))))))));
+
+    public static final IStmt EX9 =
+            new CompStmt(new VarDeclStmt("v", new RefType(new IntType())),
+                    new CompStmt(new NewStmt("v", new ValueExp(new IntValue(20))),
+                            new CompStmt(new VarDeclStmt("a", new RefType(new RefType(new IntType()))),
+                                    new CompStmt(new NewStmt("a", new VarExp("v")),
+                                            new CompStmt(new NewStmt("v", new ValueExp(new IntValue(30))),
+                                                    new PrintStmt(new ReadHeapExp(new ReadHeapExp(new VarExp("a")))))))));
 
     // int v; v = 4; (while (v > 0) (print(v); v = v - 1)); print(v)
     public static final IStmt EX10 =

@@ -66,7 +66,7 @@ public class PrgState {
                 + "SymTable: " + symTable + "\n"
                 + "Out: " + out + "\n"
                 + "FileTable: " + fileTable + "\n"
-                + "Heap: " + heap;
+                + "Heap: " + heap + "\n";
     }
 
     public String toLogString() {
