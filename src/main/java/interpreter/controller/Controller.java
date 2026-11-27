@@ -6,7 +6,10 @@ import interpreter.model.PrgState;
 import interpreter.model.stmt.IStmt;
 import interpreter.repository.IRepository;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.ExecutorService;
+import java.util.stream.Collectors;
 
 import static interpreter.controller.GarbageCollector.getAddrFromSymTable;
 import static interpreter.controller.GarbageCollector.safeGarbageCollector;
@@ -14,6 +17,13 @@ import static interpreter.controller.GarbageCollector.safeGarbageCollector;
 public class Controller {
     IRepository repo;
     private final boolean displayFlag;
+    private ExecutorService executor;
+
+    List<PrgState> removeCompletedPrg(List<PrgState> inPrgList) {
+        return inPrgList.stream()
+                .filter(PrgState::isNotCompleted)
+                .collect(Collectors.toList()); // a mutable list
+    }
 
     public Controller(IRepository repo, boolean displayFlag) {
         this.repo = repo;
