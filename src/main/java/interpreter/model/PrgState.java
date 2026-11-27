@@ -125,7 +125,7 @@ public class PrgState {
 
     public Optional<PrgState> oneStep() throws MyException {
         if(exeStack.isEmpty())
-            throw new StatementException("Program state stackis empty!");
+            throw new StatementException("Program state stack is empty!");
         IStmt current = exeStack.pop();
         return current.execute(this);
     }

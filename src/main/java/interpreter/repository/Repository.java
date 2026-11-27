@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Repository implements IRepository{
-    private final List<PrgState> states = new ArrayList<>();
+    private List<PrgState> states = new ArrayList<>();
     public final String logFilePath;
 
     public Repository(PrgState initialState, String logFilePath) {
@@ -21,15 +21,20 @@ public class Repository implements IRepository{
     }
 
     @Override
-    public PrgState getCrtPrg() {
-        return states.getFirst();
+    public List<PrgState> getPrgList() {
+        return List.copyOf(states);
     }
 
     @Override
-    public void logPrgStateExec() throws MyException {
+    public void setPrgList(List<PrgState> prgList) {
+        this.states = prgList;
+    }
+
+    @Override
+    public void logPrgStateExec(PrgState state) throws MyException {
         try (var logFile = new PrintWriter(
                 new BufferedWriter(new FileWriter(logFilePath, true)))) { // append
-            logFile.println(getCrtPrg().toLogString());
+            logFile.println(state.toLogString());
         } catch (IOException e) {
             throw new RepositoryException("cannot write the log file " + logFilePath
                     + ": " + e.getMessage());

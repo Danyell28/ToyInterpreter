@@ -112,3 +112,67 @@ Out:
 FileTable:
 Heap:
 
+ProgramState Id: 11
+ExeStack:
+(int a ;(new(a, 2); print(a) ) ) 
+SymTable:
+Out:
+FileTable:
+Heap:
+
+ProgramState Id: 11
+ExeStack:
+int a 
+(new(a, 2); print(a) ) 
+SymTable:
+Out:
+FileTable:
+Heap:
+
+ProgramState Id: 11
+ExeStack:
+int a 
+(new(a, 2); print(a) ) 
+SymTable:
+Out:
+FileTable:
+Heap:
+
+ProgramState Id: 11
+ExeStack:
+(new(a, 2); print(a) ) 
+SymTable:
+a --> 0
+Out:
+FileTable:
+Heap:
+
+ProgramState Id: 11
+ExeStack:
+(new(a, 2); print(a) ) 
+SymTable:
+a --> 0
+Out:
+FileTable:
+Heap:
+
+ProgramState Id: 11
+ExeStack:
+new(a, 2)
+ print(a) 
+SymTable:
+a --> 0
+Out:
+FileTable:
+Heap:
+
+ProgramState Id: 11
+ExeStack:
+new(a, 2)
+ print(a) 
+SymTable:
+a --> 0
+Out:
+FileTable:
+Heap:
+
