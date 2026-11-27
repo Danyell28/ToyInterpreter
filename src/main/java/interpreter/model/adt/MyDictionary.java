@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MyDictionary<K, V> implements IDictionary<K, V>{
-    private final HashMap<K, V> dict = new HashMap<>();
+    private HashMap<K, V> dict = new HashMap<>();
 
     @Override
     public synchronized boolean isDefined(K key) {
@@ -47,5 +47,16 @@ public class MyDictionary<K, V> implements IDictionary<K, V>{
     @Override
     public synchronized Map<K, V> toMap(){
         return Map.copyOf(dict);
+    }
+
+    public synchronized void setDict(HashMap<K, V> other){
+        this.dict = new HashMap<>(other);
+    }
+
+    @Override
+    public synchronized IDictionary<K, V> copy(){
+        IDictionary<K, V> copyDict = new MyDictionary<>();
+        copyDict.setDict(this.dict);
+        return copyDict;
     }
 }

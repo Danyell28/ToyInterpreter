@@ -2,6 +2,7 @@ package interpreter.model.adt;
 
 import interpreter.exceptions.ADTException;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public interface IDictionary<K, V> {
@@ -11,4 +12,6 @@ public interface IDictionary<K, V> {
     void update(K key, V value) throws ADTException;
     void remove(K key) throws ADTException; // new: missing key -> ADTException
     Map<K, V> toMap();
+    IDictionary<K, V> copy();
+    void setDict(HashMap<K, V> other);
 }
