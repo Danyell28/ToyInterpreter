@@ -8,9 +8,11 @@ import interpreter.model.type.BoolType;
 import interpreter.model.value.BoolValue;
 import interpreter.model.value.IValue;
 
+import java.util.Optional;
+
 public record WhileStmt(IExp cond, IStmt body) implements IStmt{
     @Override
-    public PrgState execute(PrgState state) throws MyException {
+    public Optional<PrgState> execute(PrgState state) throws MyException {
         IValue value = cond.eval(state.getSymTable(), state.getHeap());
         if(! value.getType().equals(new BoolType()))
             throw new StatementException("while: " + cond + " is not a boolean");
@@ -18,7 +20,7 @@ public record WhileStmt(IExp cond, IStmt body) implements IStmt{
             state.getExeStack().push(this);
             state.getExeStack().push(body);
         }
-        return state;
+        return Optional.empty();
     }
 
     @Override

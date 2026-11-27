@@ -6,10 +6,12 @@ import interpreter.model.PrgState;
 import interpreter.model.exp.IExp;
 import interpreter.model.value.BoolValue;
 
+import java.util.Optional;
+
 public record IfStmt(IExp cond, IStmt thenS, IStmt elseS) implements IStmt{
 
     @Override
-    public PrgState execute(PrgState state) throws MyException {
+    public Optional<PrgState> execute(PrgState state) throws MyException {
         var c = cond.eval(state.getSymTable(),state.getHeap() );
         if ( !c.getType().equals(new BoolValue(true).getType()) )
             throw new StatementException("Condition is not a boolean");
@@ -17,7 +19,7 @@ public record IfStmt(IExp cond, IStmt thenS, IStmt elseS) implements IStmt{
             state.getExeStack().push(thenS);
         else
             state.getExeStack().push(elseS);
-        return state;
+        return Optional.empty();
     }
 
     @Override

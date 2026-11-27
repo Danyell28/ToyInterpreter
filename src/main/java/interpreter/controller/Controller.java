@@ -6,6 +6,8 @@ import interpreter.model.PrgState;
 import interpreter.model.stmt.IStmt;
 import interpreter.repository.IRepository;
 
+import java.util.Optional;
+
 import static interpreter.controller.GarbageCollector.getAddrFromSymTable;
 import static interpreter.controller.GarbageCollector.safeGarbageCollector;
 
@@ -24,7 +26,7 @@ public class Controller {
         }
     }
 
-    public PrgState oneStep(PrgState state) throws MyException {
+    public Optional<PrgState> oneStep(PrgState state) throws MyException {
         var stack = state.getExeStack();
         if( stack.isEmpty())
             throw new StatementException("program state stack is empty");

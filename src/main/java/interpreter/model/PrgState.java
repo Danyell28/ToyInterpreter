@@ -1,11 +1,14 @@
 package interpreter.model;
 
+import interpreter.exceptions.MyException;
+import interpreter.exceptions.StatementException;
 import interpreter.model.adt.*;
 import interpreter.model.stmt.IStmt;
 import interpreter.model.value.IValue;
 import interpreter.model.value.StringValue;
 
 import java.io.BufferedReader;
+import java.util.Optional;
 import java.util.TreeMap;
 
 public class PrgState {
@@ -16,6 +19,13 @@ public class PrgState {
     private IHeap heap;
     private final IStmt originalProgram;
 
+    private final int id; // new in A5
+    private static int nextId = 1;
+
+    public static synchronized int newId(){
+        return nextId++;
+    }
+
     public PrgState(IStack<IStmt> exeStack, IDictionary<String, IValue> symTable,
                     IList<IValue> out,IDictionary<StringValue, BufferedReader> fileTable, IHeap heap, IStmt program) {
         this.exeStack = exeStack;
@@ -24,6 +34,7 @@ public class PrgState {
         this.fileTable = fileTable;
         this.originalProgram = program;
         this.heap = heap;
+        this.id = newId();
         exeStack.push(program);
     }
 
@@ -62,7 +73,8 @@ public class PrgState {
 
     @Override
     public String toString() {
-        return "ExeStack: " + exeStack + "\n"
+        return "ProgramState Id: " + id + "\n"
+                + "ExeStack: " + exeStack + "\n"
                 + "SymTable: " + symTable + "\n"
                 + "Out: " + out + "\n"
                 + "FileTable: " + fileTable + "\n"
@@ -71,6 +83,7 @@ public class PrgState {
 
     public String toLogString() {
         var sb = new StringBuilder();
+        sb.append("ProgramState Id: " + this.id + "\n");
         sb.append("ExeStack:\n");
         exeStack.toList().forEach(s -> sb.append(s).append('\n'));
         sb.append("SymTable:\n");
@@ -100,5 +113,20 @@ public class PrgState {
 
     public void setHeap(IHeap heap) {
         this.heap = heap;
+    }
+
+    public int getId(){
+        return this.id;
+    }
+
+    public boolean isNotCompleted(){
+        return !this.exeStack.isEmpty();
+    }
+
+    public Optional<PrgState> oneStep() throws MyException {
+        if(exeStack.isEmpty())
+            throw new StatementException("Program state stackis empty!");
+        IStmt current = exeStack.pop();
+        return current.execute(this);
     }
 }

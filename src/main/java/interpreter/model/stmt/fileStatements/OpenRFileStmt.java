@@ -10,11 +10,12 @@ import interpreter.model.value.StringValue;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Optional;
 
 public record OpenRFileStmt(IExp exp) implements IStmt{
 
     @Override
-    public PrgState execute(PrgState state) throws MyException {
+    public Optional<PrgState> execute(PrgState state) throws MyException {
         if( !( exp.eval(state.getSymTable(), state.getHeap()) instanceof StringValue fileName))
             throw new StatementException("openRFile: " + exp + " is not a string");
         var fileTable = state.getFileTable();
@@ -27,7 +28,7 @@ public record OpenRFileStmt(IExp exp) implements IStmt{
         catch(IOException e){
             throw new StatementException("openRFile: cannot open " + fileName + ": " + e.getMessage());
         }
-        return state;
+        return Optional.empty();
     }
 
     @Override

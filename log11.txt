@@ -1,0 +1,114 @@
+ExeStack:
+(int a ;(new(a, 2); print(a) ) ) 
+SymTable:
+Out:
+FileTable:
+Heap:
+
+ExeStack:
+int a 
+(new(a, 2); print(a) ) 
+SymTable:
+Out:
+FileTable:
+Heap:
+
+ExeStack:
+int a 
+(new(a, 2); print(a) ) 
+SymTable:
+Out:
+FileTable:
+Heap:
+
+ExeStack:
+(new(a, 2); print(a) ) 
+SymTable:
+a --> 0
+Out:
+FileTable:
+Heap:
+
+ExeStack:
+(new(a, 2); print(a) ) 
+SymTable:
+a --> 0
+Out:
+FileTable:
+Heap:
+
+ExeStack:
+new(a, 2)
+ print(a) 
+SymTable:
+a --> 0
+Out:
+FileTable:
+Heap:
+
+ExeStack:
+new(a, 2)
+ print(a) 
+SymTable:
+a --> 0
+Out:
+FileTable:
+Heap:
+
+ExeStack:
+(int a ;(new(a, 2); print(a) ) ) 
+SymTable:
+Out:
+FileTable:
+Heap:
+
+ExeStack:
+int a 
+(new(a, 2); print(a) ) 
+SymTable:
+Out:
+FileTable:
+Heap:
+
+ExeStack:
+int a 
+(new(a, 2); print(a) ) 
+SymTable:
+Out:
+FileTable:
+Heap:
+
+ExeStack:
+(new(a, 2); print(a) ) 
+SymTable:
+a --> 0
+Out:
+FileTable:
+Heap:
+
+ExeStack:
+(new(a, 2); print(a) ) 
+SymTable:
+a --> 0
+Out:
+FileTable:
+Heap:
+
+ExeStack:
+new(a, 2)
+ print(a) 
+SymTable:
+a --> 0
+Out:
+FileTable:
+Heap:
+
+ExeStack:
+new(a, 2)
+ print(a) 
+SymTable:
+a --> 0
+Out:
+FileTable:
+Heap:
+

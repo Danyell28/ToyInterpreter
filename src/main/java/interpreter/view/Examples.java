@@ -117,4 +117,9 @@ public class Examples {
                                                     new VarExp("v"), new ValueExp(new IntValue(1)))))),
                                     new PrintStmt(new VarExp("v")))));
 
+    public static final IStmt EX11 =
+            new CompStmt(new VarDeclStmt("a", new IntType()),
+                    new CompStmt(new NewStmt("a", new ValueExp(new IntValue(2))),
+                            new PrintStmt(new VarExp("a"))));
+
 }

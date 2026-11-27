@@ -8,11 +8,12 @@ import interpreter.model.stmt.IStmt;
 import interpreter.model.value.StringValue;
 
 import java.io.IOException;
+import java.util.Optional;
 
 public record CloseRFileStmt(IExp exp) implements IStmt {
 
     @Override
-    public PrgState execute(PrgState state) throws MyException {
+    public Optional<PrgState> execute(PrgState state) throws MyException {
         if( !(exp.eval(state.getSymTable(), state.getHeap()) instanceof StringValue fileName))
             throw new StatementException("closeRFile: " + exp + " is not a string");
         var fileTable = state.getFileTable();
@@ -25,7 +26,7 @@ public record CloseRFileStmt(IExp exp) implements IStmt {
         catch(IOException e) {
             throw new StatementException("closeRFile: could not be closed " + fileName + ": " + e.getMessage());
         }
-        return state;
+        return Optional.empty();
     }
 
     @Override

@@ -10,10 +10,11 @@ import interpreter.model.value.IntValue;
 import interpreter.model.value.StringValue;
 
 import java.io.IOException;
+import java.util.Optional;
 
 public record ReadFileStmt(IExp exp, String varName) implements IStmt {
     @Override
-    public PrgState execute(PrgState state) throws MyException {
+    public Optional<PrgState> execute(PrgState state) throws MyException {
         if( !state.getSymTable().isDefined(varName))
             throw new StatementException("Variable " + varName + " is not declared");
         if( !state.getSymTable().lookup(varName).getType().equals(new IntType()))
@@ -34,7 +35,7 @@ public record ReadFileStmt(IExp exp, String varName) implements IStmt {
         catch(IOException | NumberFormatException e){
             throw new StatementException("readFile: could not read from " + fileName + ": " + e.getMessage());
         }
-        return state;
+        return Optional.empty();
     }
 
     @Override

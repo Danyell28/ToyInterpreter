@@ -8,9 +8,11 @@ import interpreter.model.stmt.IStmt;
 import interpreter.model.value.IValue;
 import interpreter.model.value.RefValue;
 
+import java.util.Optional;
+
 public record NewStmt(String varName, IExp exp) implements IStmt {
     @Override
-    public PrgState execute(PrgState state) throws MyException {
+    public Optional<PrgState> execute(PrgState state) throws MyException {
         var symTable = state.getSymTable();
         if ( !symTable.isDefined(varName))
             throw new StatementException("new: " + varName + " is not declared");
@@ -23,7 +25,7 @@ public record NewStmt(String varName, IExp exp) implements IStmt {
                 + ", expected " + ref.locationType());
         int address = state.getHeap().allocate(value);
         symTable.put(varName, new RefValue(address, ref.locationType()));
-        return state;
+        return Optional.empty();
     }
 
     @Override public String toString() {
